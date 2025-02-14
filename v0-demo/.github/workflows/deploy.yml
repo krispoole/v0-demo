@@ -25,24 +25,25 @@ jobs:
         with:
           node-version: '18'
           cache: 'npm'
-          cache-dependency-path: './v0-demo/frontend/package-lock.json'
+          cache-dependency-path: 'v0-demo/package-lock.json'
       
       - name: Install dependencies
-        run: npm ci
-        working-directory: ./v0-demo/frontend
+        run: |
+          cd v0-demo
+          npm ci
       
       - name: Build
         run: |
+          cd v0-demo
           npm run build
           touch out/.nojekyll
-        working-directory: ./v0-demo/frontend
         env:
-          NEXT_PUBLIC_BASE_PATH: /v0-demo/frontend
+          NEXT_PUBLIC_BASE_PATH: /v0-demo
       
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v2
         with:
-          path: ./v0-demo/frontend/out
+          path: v0-demo/out
 
   deploy:
     environment:
