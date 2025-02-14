@@ -1,5 +1,4 @@
 name: Deploy to GitHub Pages
-
 on:
   push:
     branches: ["main"]
@@ -25,29 +24,21 @@ jobs:
         with:
           node-version: 18
           cache: 'npm'
-          cache-dependency-path: 'v0-demo/package-lock.json'
-          
+          cache-dependency-path: './package-lock.json'
+      
       - name: Install dependencies
-        working-directory: ./v0-demo
         run: npm ci
-        
+      
       - name: Build
-        working-directory: ./v0-demo
         run: npm run build
         env:
           NODE_ENV: production
           NEXT_PUBLIC_BASE_PATH: /v0-demo
-        
-      - name: Create .nojekyll file
-        working-directory: ./v0-demo
-        run: |
-          touch out/.nojekyll
-          cp out/404.html out/index.html
-        
+      
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ./v0-demo/out
+          path: ./out
 
   deploy:
     environment:
