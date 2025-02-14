@@ -16,7 +16,7 @@ export default function Home() {
               </p>
             </div>
             <div className="flex flex-col gap-2 min-[400px]:flex-row">
-              <Link href="/dashboard">
+              <Link href={`${process.env.NEXT_PUBLIC_BASE_PATH || ''}/dashboard`}>
                 <Button
                   size="lg"
                   className="bg-gradient-to-r from-pink-200 to-pink-100 text-black hover:from-pink-300 hover:to-pink-200"
