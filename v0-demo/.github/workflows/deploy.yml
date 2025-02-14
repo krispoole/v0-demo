@@ -35,11 +35,14 @@ jobs:
         working-directory: ./v0-demo
         run: npm run build
         env:
+          NODE_ENV: production
           NEXT_PUBLIC_BASE_PATH: /v0-demo
         
       - name: Create .nojekyll file
         working-directory: ./v0-demo
-        run: touch out/.nojekyll
+        run: |
+          touch out/.nojekyll
+          cp out/404.html out/index.html
         
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
